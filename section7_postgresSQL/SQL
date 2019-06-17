@@ -1,0 +1,42 @@
+--To select data from tables:
+--SELECT * FROM table;
+
+--To filter selected data use WHERE and conditions , can also use AND/OR
+--SELECT * FROM table WHERE col.value=value OR col.value=value2 AND col.value=value3;
+
+--To use aliases to present data & limit number of results shown
+--SELECT customers.first_name AS "First name", customers.last_name AS "Last name" FROM customers LIMIT 3;
+
+--Updating data in tables *careful to use filter or might wipe data*
+--UPDATE items SET "price"=4.50 WHERE "name" = 'Ink';
+
+--Using Wildcards for filtering
+--SELECT * FROM customers WHERE last_name LIKE '%t_';
+
+--Delete from table
+--DELETE FROM customers WHERE last_name LIKE '%t_';
+
+--Using the JOIN operator to retrieve data from multiple tables
+--SELECT * FROM customers INNER JOIN purchases ON customers.id = purchases.customer_id;
+
+--Using the JOIN LEFToperator to retrieve data from multiple tables
+--SELECT * FROM customers LEFT JOIN purchases ON customers.id = purchases.customer_id;
+
+--Using the JOIN RIGHT operator to retrieve data from multiple tables
+--SELECT * FROM customers RIGHT JOIN purchases ON customers.id = purchases.customer_id;
+
+
+--Using the JOIN FULL operator to retrieve data from multiple tables
+--SELECT * FROM customers FULL JOIN purchases ON customers.id = purchases.customer_id;
+
+
+SELECT customers.first_name, customers.last_name, items.name, items.price FROM items
+INNER JOIN purchases ON items.id = purchases.item_id
+INNER JOIN customers ON purchases.customer_id = customers.id;
+
+SELECT customers.first_name, count(purchases.id), sum(items.price) AS "total_spent" FROM purchases
+INNER JOIN items ON items.id = purchases.item_id
+INNER JOIN customers ON  customers.id = purchases.customer_id
+GROUP BY customers.id
+ORDER BY total_spent DESC
+LIMIT 1; --BEST CUSTOMER
