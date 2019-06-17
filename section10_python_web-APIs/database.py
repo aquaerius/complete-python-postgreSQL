@@ -5,36 +5,40 @@ class Database:
 
     __connection_pool = None
 
-    @staticmethod
-    def initialise(**kwargs):
-        Database.__connection_pool = pool.SimpleConnectionPool(1, 10, **kwargs)
+    @classmethod
+    def initialise(cls, **kwargs):
+        cls.__connection_pool = pool.SimpleConnectionPool(1, 10, **kwargs)
 
-    @staticmethod
-    def get_connection():
-        return Database.__connection_pool.getconn()
+    @classmethod
+    def get_connection(cls, ):
+        return cls.__connection_pool.getconn()
 
-    @staticmethod
-    def return_connection(connection):
-        Database.__connection_pool.putconn(connection)
+    @classmethod
+    def return_connection(cls, connection):
+        cls.__connection_pool.putconn(connection)
 
-    @staticmethod
-    def close_all_connections():
-        Database.__connection_pool.closeall()
+    @classmethod
+    def close_all_connections(cls, ):
+        cls.__connection_pool.closeall()
+
 
 class CursorFromConnectionPool:
+    
     def __init__(self):
-        self.conn = None
+        self.connection = None
         self.cursor = None
 
     def __enter__(self):
-        self.conn = Database.get_connection()
-        self.cursor = self.conn.cursor()
+        self.connection = Database.get_connection()
+        self.cursor = self.connection.cursor()
         return self.cursor
 
     def __exit__(self, exception_type, exception_value, exception_traceback):
-        if exception_value:  # This is equivalent to `if exception_value is not None`
-            self.conn.rollback()
+        if exception_value:
+            self.connection.rollback()
+            print(exception_type)
+            print(exception_traceback)
         else:
             self.cursor.close()
-            self.conn.commit()
-        Database.return_connection(self.conn)
+            self.connection.commit()
+        Database.return_connection(self.connection)
