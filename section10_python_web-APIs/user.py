@@ -15,13 +15,13 @@ class User:
         return "<User {}>".format(self.screen_name)
 
     def save_to_db(self):
-        with CursorFromConnectionFromPool() as cursor:
+        with CursorFromConnectionPool() as cursor:
             cursor.execute('INSERT INTO users (screen_name, oauth_token, oauth_token_secret) VALUES (%s, %s, %s)',
                            (self.screen_name, self.oauth_token, self.oauth_token_secret))
 
     @classmethod
     def load_from_db_by_screen_name(cls, screen_name):
-        with CursorFromConnectionFromPool() as cursor:
+        with CursorFromConnectionPool() as cursor:
             cursor.execute('SELECT * FROM users WHERE screen_name=%s', (screen_name,))
             user_data = cursor.fetchone()
             if user_data:
