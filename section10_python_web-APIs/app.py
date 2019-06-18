@@ -40,7 +40,9 @@ def logout():
 
 @app.route('/auth/twitter')  # http://127.0.0.1:4995/auth/twitter?oauth_verifier=1234567
 def twitter_auth():
+    # Get oauth_verifier from the uri query string
     oauth_verifier = request.args.get('oauth_verifier')
+    # Get the access token
     access_token = get_access_token(session['request_token'], oauth_verifier)
 
     user = User.load_from_db_by_screen_name(access_token['screen_name'])
