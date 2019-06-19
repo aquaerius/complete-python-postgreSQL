@@ -1,29 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Search results</title>
-</head>
-
-<body>
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
     <div class="container">
         <ul class="list-group" id="tweets">
-
+            <!-- Create variable "css_class" to hold class value -->
             {% set css_class = 'list-group-item-info' %}
-
+            <!-- Iterate through the passed content and assign "css_class" name from sentiment -->
             {% for element in content %}
                 {% if element['label'] == 'neg' %}
                     {% set css_class = 'list-group-item-danger' %}
                 {% elif element['label'] == 'pos' %}
                     {% set css_class = 'list-group-item-success' %}
                 {% endif %}
-
+                <!-- Create list item with tweet and css_class -->
                 <li class="list-group-item {{ css_class }}">{{ element['tweet'] }}</li>
             {% endfor %}
         </ul>
     </div>
-</body>
-
-</html>
+{% endblock %}

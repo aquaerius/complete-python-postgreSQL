@@ -19,7 +19,7 @@ def load_user():
 
 @app.route('/')
 def homepage():
-    return render_template('home.html')
+    return render_template('home.html', title='Home')
 
 
 @app.route('/login/twitter')
@@ -58,22 +58,30 @@ def twitter_auth():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html', user=g.user)
+    return render_template('profile.html', user=g.user, title='User profile')
 
 
 @app.route('/search')
 def search():
+    # Get query from user form
     query = request.args.get('q')
+    # Get tweets using User method
     tweets = g.user.twitter_request('https://api.twitter.com/1.1/search/tweets.json?q={}'.format(query))
-
+    # Initialize dict with tweet texts and a default label
     tweet_texts = [{'tweet': tweet['text'], 'label': 'neutral'} for tweet in tweets['statuses']]
-
+    # Perform sentiment analysis on each tweet text
     for tweet in tweet_texts:
+        # Make API request
         r = requests.post('http://text-processing.com/api/sentiment/', data={'text': tweet['tweet']})
+        # Put response in json object
         json_response = r.json()
+        # Get label from response
         label = json_response['label']
+        # Update tweet sentiment label
         tweet['label'] = label
 
-    return render_template('search.html', content=tweet_texts)
+    # Pass tweet_texts obj as content and render template
+    return render_template('search.html', content=tweet_texts, title='Search results')
+
 
 app.run(port=4995, debug=True)
