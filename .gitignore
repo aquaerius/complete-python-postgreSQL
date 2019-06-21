@@ -24,7 +24,7 @@ $RECYCLE.BIN/
 
 #Virtual environment files
 /venv
-/complete-python-postgreSQL
+/complete-python-postgreSQL/*/__pycache__
 
 #Pycharm workspace files
 /.idea
