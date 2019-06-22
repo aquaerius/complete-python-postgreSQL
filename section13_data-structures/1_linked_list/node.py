@@ -3,16 +3,12 @@ class Node:
     This Node class has been created for you.
     It contains the necessary properties for the solution, which are:
     - name
-    - matric
-    - year
-    - next
+    - telephone
     """
 
-    def __init__(self, name, matric, year):
+    def __init__(self, name, telephone):
         self.name = name
-        self.matric = matric
-        self.year = year
-        self.__next = None
+        self.telephone = telephone
 
     def set_next(self, node):
         if isinstance(node, Node) or node is None:

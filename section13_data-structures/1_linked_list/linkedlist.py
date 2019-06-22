@@ -28,4 +28,13 @@ class LinkedList:
                 return marker
             else:
                 marker = marker.get_next()
-        raise LookupError()
+        raise LookupError("Name {} was not found in the linked list.".format(name))
+
+    def pop(self):
+        marker = self.__root
+        last_node = None
+        while marker:
+            last_node = marker
+            marker = marker.get_next()
+        last_node.set_next(None)
+
