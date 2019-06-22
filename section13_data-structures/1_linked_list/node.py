@@ -11,7 +11,7 @@ class Node:
         self.name = name
         self.matric = matric
         self.year = year
-
+        self.__next = None
 
     def set_next(self, node):
         if isinstance(node, Node) or node is None:
