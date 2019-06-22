@@ -29,24 +29,31 @@ class BinaryTree:
             while marker:
                 if node.value == marker.value:
                     # Raise a ValueError, because the node's value already exists.
-                    raise NotImplementedError()
+                    raise ValueError("The value already exists!")
                 elif node.value > marker.value:
-                    # Move to the right in the tree.
-                    raise NotImplementedError()
-                else:
-                    # Move to the left in the tree.
-                    raise NotImplementedError()
+                    if not marker.get_right():
+                        marker.set_right(node)
+                        return
+                    else:
+                        marker = marker.get_right()
+                elif node.value < marker.value:
+                    if not marker.get_left():
+                        marker.set_left(node)
+                        return
+                    else:
+                        marker = marker.get_left()
 
     def find(self, value):
-        """
-        You should implement this method.
-        It should locate a node with a given value, and return it.
-        If the Node is not found, it should raise a LookupError
-
-        :param value: The value of the Node to locate.
-        :return: Node, the found Node
-        """
-        raise NotImplementedError()
+        # Start iterating over the tree.
+        marker = self.__root
+        while marker:
+            if marker.value == value:
+                return marker
+            elif value > marker.value:
+                marker = marker.get_right()
+            elif value < marker.value:
+                marker = marker.get_left()
+        raise LookupError("A node with that value was not found!")
 
     def print_inorder(self):
         self.__print_inorder_r(self.__root)
