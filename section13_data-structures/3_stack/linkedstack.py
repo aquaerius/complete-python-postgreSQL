@@ -25,9 +25,4 @@ class LinkedStack:
         self.__linked_list.print_list()
 
     def __len__(self):
-        """
-        You should implement this method.
-        It should return the amount of Nodes in the linked list.
-        :return:
-        """
         return self.__linked_list.size()

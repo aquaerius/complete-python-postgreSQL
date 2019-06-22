@@ -18,9 +18,9 @@ class LinkedList:
     def remove_start_from_list(self):
         if not self.__root:
             raise RuntimeError("The list is already empty!")
-        new_root = self.__root
-        self.__root = new_root.get_next()
-        return new_root
+        removed_node = self.__root
+        self.__root = removed_node.get_next()
+        return removed_node
 
     def print_list(self):
         marker = self.__root
