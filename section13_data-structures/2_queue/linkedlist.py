@@ -11,24 +11,24 @@ class LinkedList:
         return self.__root
 
     def add_start_to_list(self, node):
-        """
-        You can reuse the method written for the previous assignment here.
-
-        :param node: the node to add at the start
-        :return: None
-        """
-        raise NotImplementedError()
+        node.set_next(self.__root)
+        self.__root = node
 
     def remove_end_from_list(self):
-        """
-        Implement this method! It should:
-        - Iterate over each node
-        - Find both the second-to-last node and the last node
-        - Set the second-to-last node's next to be None
-        - Return the last node
-        :return: the removed Node.
-        """
-        raise NotImplementedError()
+        marker = self.__root
+        while marker:
+            # Get the following node
+            next_node = marker.get_next()
+            # Verify it's not None
+            if next_node:
+                # Check if next node is None
+                if next_node.get_next() is None:
+                    # Set the value of marker's next node to None
+                    marker.set_next(None)
+                    removed_node = next_node
+                    return removed_node
+                else:
+                    marker = next_node
 
     def print_list(self):
         marker = self.__root
@@ -37,13 +37,13 @@ class LinkedList:
             marker = marker.get_next()
 
     def find(self, name):
-        """
-        You can reuse the method written for the previous assignment here.
-
-        :param name: the name of the Node to find.
-        :return: the found Node, or raises a LookupError if not found.
-        """
-        raise NotImplementedError()
+        marker = self.__root
+        while marker:
+            if marker.name == name:
+                return marker
+            else:
+                marker = marker.get_next()
+        raise LookupError("Name {} was not found in the linked list.".format(name))
 
     def size(self):
         """
