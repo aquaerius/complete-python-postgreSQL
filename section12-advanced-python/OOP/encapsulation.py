@@ -2,6 +2,7 @@ import oauth2
 import urllib.parse as urlparse
 
 
+# noinspection PyMethodMayBeStatic
 class TwitterConsoleLogin:
     def __init__(self, consumer_key, consumer_secret):
         self.consumer = oauth2.Consumer(consumer_key, consumer_secret)

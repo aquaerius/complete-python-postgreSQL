@@ -11,7 +11,8 @@ class LinkedList:
         return self.__root
 
     def add_start_to_list(self, node):
-        node.set_next(self.__root)
+        if node:
+            node.set_next(self.__root)
         self.__root = node
 
     def remove_end_from_list(self):
@@ -22,13 +23,12 @@ class LinkedList:
             # Verify it's not None
             if next_node:
                 # Check if next node is None
-                if next_node.get_next() is None:
+                if not next_node.get_next():
                     # Set the value of marker's next node to None
                     marker.set_next(None)
                     removed_node = next_node
                     return removed_node
-                else:
-                    marker = next_node
+                marker = next_node
             else:
                 self.__root = None
                 return marker
@@ -44,18 +44,13 @@ class LinkedList:
         while marker:
             if marker.name == name:
                 return marker
-            else:
-                marker = marker.get_next()
+            marker = marker.get_next()
         raise LookupError("Name {} was not found in the linked list.".format(name))
 
     def size(self):
         marker = self.__root
         size = 0
         while marker:
-            if marker.get_next() is not None:
-                size += 1
-                marker = marker.get_next()
-            else:
-                size += 1
-                return size
-        return 0
+            size += 1
+            marker = marker.get_next()
+        return size

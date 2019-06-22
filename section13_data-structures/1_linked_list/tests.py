@@ -17,7 +17,7 @@ class TestLinkedList(TestCase):
         matric = "1234"
         year = 2
 
-        node = Node(name, matric, year)
+        node = Node(name, matric)
 
         self.assertEqual(name, node.name)
         self.assertEqual(matric, node.matric)
@@ -33,7 +33,7 @@ class TestLinkedList(TestCase):
         matric = "1234"
         year = 2
 
-        node = Node(name, matric, year)
+        node = Node(name, matric)
 
         linked_list = LinkedList()
 
@@ -44,7 +44,7 @@ class TestLinkedList(TestCase):
     def test_add_many_to_list(self):
         names = ("Jose", "1234", 2), ("Rolf", "2345", 3), ("Anna", "3456", 7)
 
-        nodes = [Node(name, matric, year) for name, matric, year in names]
+        nodes = [Node(name, matric) for name, matric, year in names]
 
         linked_list = LinkedList()
 
@@ -59,7 +59,7 @@ class TestLinkedList(TestCase):
     def test_find_in_list(self):
         names = ("Jose", "1234", 2), ("Rolf", "2345", 3), ("Anna", "3456", 7)
 
-        nodes = [Node(name, matric, year) for name, matric, year in names]
+        nodes = [Node(name, matric) for name, matric, year in names]
 
         linked_list = LinkedList()
 

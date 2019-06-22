@@ -41,6 +41,15 @@ class TestLinkedList(TestCase):
 
         self.assertEqual(linked_list.get_root(), node)
 
+    def test_add_none_to_list_start(self):
+        linked_list = LinkedList()
+
+        linked_list.add_start_to_list(None)
+
+        self.assertEqual(linked_list.get_root(), None)
+        self.assertEqual(linked_list.size(), 0)
+
+
     def test_add_many_to_list_start(self):
         names = ("Jose", "1234-356"), ("Rolf", "2345-1-53563-2"), ("Anna", "345623-16779-3")
 
