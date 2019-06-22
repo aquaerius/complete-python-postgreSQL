@@ -51,7 +51,7 @@ class BinaryTree:
                 return marker
             elif value > marker.value:
                 marker = marker.get_right()
-            elif value < marker.value:
+            else:
                 marker = marker.get_left()
         raise LookupError("A node with that value was not found!")
 
