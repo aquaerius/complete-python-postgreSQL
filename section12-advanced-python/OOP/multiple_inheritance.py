@@ -1,9 +1,11 @@
 class ClassA:
+    # noinspection PyMethodMayBeStatic
     def hi(self):
         print("Hello")
 
 
 class ClassB:
+    # noinspection PyMethodMayBeStatic
     def hi(self):
         print('Hell yo!')
 
