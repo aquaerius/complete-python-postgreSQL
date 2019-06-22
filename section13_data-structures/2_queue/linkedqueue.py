@@ -21,7 +21,7 @@ class LinkedQueue:
         :param node: The Node to add
         :return: None
         """
-        raise NotImplementedError()
+        self.__linked_list.add_start_to_list(node)
 
     def pop(self):
         """
@@ -30,7 +30,8 @@ class LinkedQueue:
         the removed node.
         :return: Node, the last node of the linked list after being removed.
         """
-        raise NotImplementedError()
+        removed_node = self.__linked_list.remove_end_from_list()
+        return removed_node
 
     def find(self, name):
         return self.__linked_list.find(name)
@@ -44,4 +45,5 @@ class LinkedQueue:
         It should return the amount of Nodes in the linked list.
         :return:
         """
-        raise NotImplementedError()
+        return self.__linked_list.size()
+

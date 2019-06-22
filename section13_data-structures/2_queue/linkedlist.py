@@ -29,6 +29,9 @@ class LinkedList:
                     return removed_node
                 else:
                     marker = next_node
+            else:
+                self.__root = None
+                return marker
 
     def print_list(self):
         marker = self.__root
@@ -46,9 +49,13 @@ class LinkedList:
         raise LookupError("Name {} was not found in the linked list.".format(name))
 
     def size(self):
-        """
-        You should implement this method!
-        It should return the amount of Nodes in the list.
-        :return: the amount of nodes in this list.
-        """
-        raise NotImplementedError()
+        marker = self.__root
+        size = 0
+        while marker:
+            if marker.get_next() is not None:
+                size += 1
+                marker = marker.get_next()
+            else:
+                size += 1
+                return size
+        return 0
